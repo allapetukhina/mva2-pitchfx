@@ -11757,56 +11757,28 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">options</span><span class="p">(</span>repos <span class="o">=</span> <span class="kt">c</span><span class="p">(</span>CRAN <span class="o">=</span> <span class="s">&quot;http://cran.rstudio.com&quot;</span><span class="p">))</span>
-install.packages<span class="p">(</span><span class="s">&quot;pitchRx&quot;</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#options(repos = c(CRAN = &quot;http://cran.rstudio.com&quot;))</span>
+<span class="c1">#install.packages(&quot;pitchRx&quot;)</span>
+<span class="c1">#install.packages(&quot;e1071&quot;)</span>
+<span class="c1">#install.packages(&quot;dplyr&quot;)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>also installing the dependencies ‘XML’, ‘RCurl’, ‘XML2R’
-
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-The downloaded source packages are in
-	‘/tmp/RtmpjqS5L7/downloaded_packages’
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Updating HTML index of packages in &#39;.Library&#39;
-Making &#39;packages.html&#39; ... done
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="kn">library</span><span class="p">(</span>pitchRx<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>dplyr<span class="p">)</span>
+<span class="kn">library</span><span class="p">(</span>e1071<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11820,6 +11792,17 @@ Making &#39;packages.html&#39; ... done
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>Loading required package: ggplot2
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
 </pre>
 </div>
 </div>
@@ -11830,27 +11813,18 @@ Making &#39;packages.html&#39; ... done
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>rivera <span class="o">=</span> <span class="kp">subset</span><span class="p">(</span>pitches<span class="p">,</span> pitcher <span class="o">==</span> <span class="m">121250</span><span class="p">)</span>
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Analsys with &quot;pitches&quot; data (2011)</span>
+rivera <span class="o">=</span> <span class="kp">subset</span><span class="p">(</span>pitches<span class="p">,</span> pitcher <span class="o">==</span> <span class="m">121250</span><span class="p">)</span>
 hughes <span class="o">=</span> <span class="kp">subset</span><span class="p">(</span>pitches<span class="p">,</span> pitcher <span class="o">==</span> <span class="m">461833</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">dim</span><span class="p">(</span>hughes<span class="p">)</span>
+<span class="kp">dim</span><span class="p">(</span>hughes<span class="p">)</span>
 <span class="c1"># 946 70</span>
 <span class="kp">names</span><span class="p">(</span>hughes<span class="p">)</span>
 <span class="c1"># &#39;url&#39; &#39;inning_side&#39; &#39;inning&#39; &#39;next_&#39; &#39;num&#39; &#39;gameday_link&#39; &#39;row_names&#39; &#39;des&#39; &#39;des_es&#39; &#39;id&#39; &#39;type&#39; &#39;tfs&#39; &#39;tfs_zulu&#39; &#39;x&#39; &#39;y&#39; &#39;sv_id&#39; &#39;start_speed&#39; &#39;end_speed&#39; &#39;sz_top&#39; &#39;sz_bot&#39; &#39;pfx_x&#39; &#39;pfx_z&#39; &#39;px&#39; &#39;pz&#39; &#39;x0&#39; &#39;y0&#39; &#39;z0&#39; &#39;vx0&#39; &#39;vy0&#39; &#39;vz0&#39; &#39;ax&#39; &#39;ay&#39; &#39;az&#39; &#39;break_y&#39; &#39;break_angle&#39; &#39;break_length&#39; &#39;pitch_type&#39; &#39;type_confidence&#39; &#39;zone&#39; &#39;nasty&#39; &#39;spin_dir&#39; &#39;spin_rate&#39; &#39;cc&#39; &#39;mt&#39; &#39;on_1b&#39; &#39;on_2b&#39; &#39;on_3b&#39; &#39;count&#39; &#39;pitcher&#39; &#39;batter&#39; &#39;b&#39; &#39;s&#39; &#39;o&#39; &#39;start_tfs&#39; &#39;start_tfs_zulu&#39; &#39;stand&#39; &#39;b_height&#39; &#39;p_throws&#39; &#39;atbat_des&#39; &#39;atbat_des_es&#39; &#39;event&#39; &#39;score&#39; &#39;home_team_runs&#39; &#39;away_team_runs&#39; &#39;event2&#39; &#39;event3&#39; &#39;batter_name&#39; &#39;pitcher_name&#39; &#39;event4&#39; &#39;date&#39;</span>
+<span class="c1"># rivera[,c(17, 34, 35, 36, 41, 42)]</span>
+<span class="c1"># start_speed break_y break_angle break_length spin_dir spin_rate</span>
 </pre></div>
 
 </div>
@@ -11861,12 +11835,92 @@ hughes <span class="o">=</span> <span class="kp">subset</span><span class="p">(<
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 <ol class=list-inline>
 	<li>946</li>
 	<li>70</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>'url'</li>
+	<li>'inning_side'</li>
+	<li>'inning'</li>
+	<li>'next_'</li>
+	<li>'num'</li>
+	<li>'gameday_link'</li>
+	<li>'row_names'</li>
+	<li>'des'</li>
+	<li>'des_es'</li>
+	<li>'id'</li>
+	<li>'type'</li>
+	<li>'tfs'</li>
+	<li>'tfs_zulu'</li>
+	<li>'x'</li>
+	<li>'y'</li>
+	<li>'sv_id'</li>
+	<li>'start_speed'</li>
+	<li>'end_speed'</li>
+	<li>'sz_top'</li>
+	<li>'sz_bot'</li>
+	<li>'pfx_x'</li>
+	<li>'pfx_z'</li>
+	<li>'px'</li>
+	<li>'pz'</li>
+	<li>'x0'</li>
+	<li>'y0'</li>
+	<li>'z0'</li>
+	<li>'vx0'</li>
+	<li>'vy0'</li>
+	<li>'vz0'</li>
+	<li>'ax'</li>
+	<li>'ay'</li>
+	<li>'az'</li>
+	<li>'break_y'</li>
+	<li>'break_angle'</li>
+	<li>'break_length'</li>
+	<li>'pitch_type'</li>
+	<li>'type_confidence'</li>
+	<li>'zone'</li>
+	<li>'nasty'</li>
+	<li>'spin_dir'</li>
+	<li>'spin_rate'</li>
+	<li>'cc'</li>
+	<li>'mt'</li>
+	<li>'on_1b'</li>
+	<li>'on_2b'</li>
+	<li>'on_3b'</li>
+	<li>'count'</li>
+	<li>'pitcher'</li>
+	<li>'batter'</li>
+	<li>'b'</li>
+	<li>'s'</li>
+	<li>'o'</li>
+	<li>'start_tfs'</li>
+	<li>'start_tfs_zulu'</li>
+	<li>'stand'</li>
+	<li>'b_height'</li>
+	<li>'p_throws'</li>
+	<li>'atbat_des'</li>
+	<li>'atbat_des_es'</li>
+	<li>'event'</li>
+	<li>'score'</li>
+	<li>'home_team_runs'</li>
+	<li>'away_team_runs'</li>
+	<li>'event2'</li>
+	<li>'event3'</li>
+	<li>'batter_name'</li>
+	<li>'pitcher_name'</li>
+	<li>'event4'</li>
+	<li>'date'</li>
 </ol>
 
 </div>
@@ -11879,14 +11933,11 @@ hughes <span class="o">=</span> <span class="kp">subset</span><span class="p">(<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[118]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># KMeans Clustering</span>
-
-<span class="c1"># rivera[,c(17, 34, 35, 36, 41, 42)]</span>
-<span class="c1"># start_speed break_y break_angle break_length spin_dir spin_rate</span>
-
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;K-Means Clustering&quot;</span><span class="p">)</span>
 <span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
 riveraNSC <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>rivera<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">17</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">35</span><span class="p">,</span> <span class="m">36</span><span class="p">,</span> <span class="m">41</span><span class="p">,</span> <span class="m">42</span><span class="p">)],</span> <span class="kp">as.numeric</span><span class="p">)</span>
 riveraSC <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>riveraNSC<span class="p">)</span>
@@ -11918,12 +11969,13 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;Mariano Rivera&#34;
+<pre>[1] &#34;K-Means Clustering&#34;
+[1] &#34;Mariano Rivera&#34;
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11935,14 +11987,14 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>    
        1   2
-  FC 759  30
-  FF   4 119</pre>
+  FC  30 759
+  FF 119   4</pre>
 </div>
 
 </div>
@@ -11954,7 +12006,7 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11966,7 +12018,7 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11984,64 +12036,24 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[109]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Hierarchical Clustering</span>
 <span class="c1"># http://www.r-tutor.com/gpu-computing/clustering/hierarchical-cluster-analysis</span>
 <span class="c1"># https://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html</span>
 <span class="c1"># https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html</span>
-
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Hierarchical Clustering&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
 d.rivera <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>riveraSC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
 hc.rivera <span class="o">=</span> hclust<span class="p">(</span>d.rivera<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
 clustcut.rivera <span class="o">=</span> cutree<span class="p">(</span>hc.rivera<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 rivera<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.rivera
 <span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>hierclust<span class="p">)</span>
 <span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>clusterSC<span class="p">,</span> rivera<span class="o">$</span>hierclust<span class="p">)</span>
-</pre></div>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>    
-       1   2
-  FC 786   3
-  FF  17 106</pre>
-</div>
-
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>   
-      1   2
-  1  41 108
-  2 762   1</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>d.hughes <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>hughesSC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
+d.hughes <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>hughesSC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
 hc.hughes <span class="o">=</span> hclust<span class="p">(</span>d.hughes<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
 clustcut.hughes <span class="o">=</span> cutree<span class="p">(</span>hc.hughes<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hughes
@@ -12057,7 +12069,46 @@ hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hu
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Hierarchical Clustering&#34;
+[1] &#34;Mariano Rivera&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       1   2
+  FC 786   3
+  FF  17 106</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+      1   2
+  1  41 108
+  2 762   1</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12069,7 +12120,7 @@ hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hu
 
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12087,64 +12138,13 @@ hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hu
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[97]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#install.packages(&quot;kernlab&quot;)</span>
-<span class="c1">#library(kernlab)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[99]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#install.packages(&quot;e1071&quot;)</span>
-<span class="kn">library</span><span class="p">(</span>e1071<span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-The downloaded source packages are in
-	‘/tmp/RtmpjqS5L7/downloaded_packages’
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>Updating HTML index of packages in &#39;.Library&#39;
-Making &#39;packages.html&#39; ... done
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># SVM</span>
 <span class="c1"># http://rischanlab.github.io/SVM.html</span>
-
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Support Vector Machines&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
 svm_model.rivera <span class="o">&lt;-</span> svm<span class="p">(</span>riveraSC<span class="p">,</span> <span class="kp">as.factor</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">))</span>
 svm_predict.rivera <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.rivera<span class="p">,</span> riveraSC<span class="p">)</span>
 rivera<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.rivera
@@ -12154,83 +12154,9 @@ rivera<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.r
 <span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>hierclust<span class="p">,</span> rivera<span class="o">$</span>svmpred<span class="p">)</span>
 <span class="kp">print</span><span class="p">(</span><span class="s">&quot;K-Means vs SVM:&quot;</span><span class="p">)</span>
 <span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>clusterSC<span class="p">,</span> rivera<span class="o">$</span>svmpred<span class="p">)</span>
-</pre></div>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;MLB Classification vs SVM:&#34;
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>    
-      FC  FF
-  FC 787   2
-  FF   5 118</pre>
-</div>
-
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;Hierarchical Clustering vs SVM:&#34;
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>   
-     FC  FF
-  1 789  14
-  2   3 106</pre>
-</div>
-
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;K-Means vs SVM:&#34;
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>   
-     FC  FF
-  1  33 116
-  2 759   4</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span>svm_model.hughes <span class="o">&lt;-</span> svm<span class="p">(</span>hughesSC<span class="p">,</span> <span class="kp">as.factor</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">),</span> kernel<span class="o">=</span><span class="s">&quot;radial&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
+svm_model.hughes <span class="o">&lt;-</span> svm<span class="p">(</span>hughesSC<span class="p">,</span> <span class="kp">as.factor</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">),</span> kernel<span class="o">=</span><span class="s">&quot;radial&quot;</span><span class="p">)</span>
 svm_predict.hughes <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.hughes<span class="p">,</span> hughesSC<span class="p">)</span>
 hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.hughes
 <span class="kp">print</span><span class="p">(</span><span class="s">&quot;MLB Classification vs SVM:&quot;</span><span class="p">)</span>
@@ -12251,12 +12177,72 @@ hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.h
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[1] &#34;MLB Classification vs SVM:&#34;
+<pre>[1] &#34;Support Vector Machines&#34;
+[1] &#34;Mariano Rivera&#34;
+[1] &#34;MLB Classification vs SVM:&#34;
 </pre>
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+      FC  FF
+  FC 787   2
+  FF   5 118</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Hierarchical Clustering vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1 789  14
+  2   3 106</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;K-Means vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1  33 116
+  2 759   4</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+[1] &#34;MLB Classification vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12275,7 +12261,7 @@ hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.h
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12294,7 +12280,7 @@ hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.h
 </div>
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -12302,6 +12288,455 @@ hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.h
      FC  FF
   1   0 784
   2 150  12</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># load game ids to filter out 2010 games where Rivera or Hughes pitched</span>
+data<span class="p">(</span>gids<span class="p">,</span> package<span class="o">=</span><span class="s">&quot;pitchRx&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># I manually got all the games Phil Hughes and Mariano Rivera pitched by checking their game logs at mlb.com</span>
+riveraandhughes2010 <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;2010-10-02&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-26&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-21&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-15&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-10&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-05&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-31&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-25&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-19&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-14&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-09&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-04&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-30&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-25&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-20&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-09&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-04&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-29&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-19&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-13&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-08&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-02&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-28&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-22&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-17&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-12&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-07&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-02&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-27&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-21&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-15&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-28&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-20&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-19&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-17&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-14&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-11&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-04&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-03&quot;</span><span class="p">,</span><span class="s">&quot;2010-09-01&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-29&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-28&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-21&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-18&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-17&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-11&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-10&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-08&quot;</span><span class="p">,</span><span class="s">&quot;2010-08-07&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-31&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-26&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-21&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-18&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-16&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-08&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-05&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-02&quot;</span><span class="p">,</span><span class="s">&quot;2010-07-01&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-27&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-25&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-23&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-20&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-11&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-09&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-06&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-03&quot;</span><span class="p">,</span><span class="s">&quot;2010-06-01&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-30&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-26&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-25&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-21&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-18&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-16&quot;</span><span class="p">,</span><span class="s">&quot;2010-05-14&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-30&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-29&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-20&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-18&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-13&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-11&quot;</span><span class="p">,</span><span class="s">&quot;2010-04-07&quot;</span><span class="p">,</span> <span class="s">&quot;2010-04-06&quot;</span><span class="p">)</span>
+yankees10 <span class="o">=</span> gids<span class="p">[</span><span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;nya&quot;</span><span class="p">,</span> gids<span class="p">)</span> <span class="o">&amp;</span> <span class="kp">grepl</span><span class="p">(</span><span class="s">&quot;2010&quot;</span><span class="p">,</span> gids<span class="p">)]</span>
+riveraandhughes2010 <span class="o">=</span> <span class="kp">gsub</span><span class="p">(</span><span class="s">&quot;-&quot;</span><span class="p">,</span><span class="s">&quot;_&quot;</span><span class="p">,</span>riveraandhughes2010<span class="p">)</span>
+rh2010.gids <span class="o">=</span> <span class="kp">unique</span><span class="p">(</span><span class="kp">grep</span><span class="p">(</span><span class="kp">paste</span><span class="p">(</span>riveraandhughes2010<span class="p">,</span>collapse<span class="o">=</span><span class="s">&quot;|&quot;</span><span class="p">),</span> yankees10<span class="p">,</span> value<span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="c1"># rh2010.gids # list of game ids</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># this took over 5 minutes on my computer</span>
+dat <span class="o">&lt;-</span> scrape<span class="p">(</span>game.ids <span class="o">=</span> rh2010.gids<span class="p">,</span> async <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>If file names don&#39;t print right away, please be patient.
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_06/gid_2010_04_06_nyamlb_bosmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_07/gid_2010_04_07_nyamlb_bosmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_11/gid_2010_04_11_nyamlb_tbamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_13/gid_2010_04_13_anamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_15/gid_2010_04_15_anamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_18/gid_2010_04_18_texmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_20/gid_2010_04_20_nyamlb_oakmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_21/gid_2010_04_21_nyamlb_oakmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_27/gid_2010_04_27_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_29/gid_2010_04_29_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_04/day_30/gid_2010_04_30_chamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_02/gid_2010_05_02_chamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_07/gid_2010_05_07_nyamlb_bosmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_12/gid_2010_05_12_nyamlb_detmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_12/gid_2010_05_12_nyamlb_detmlb_2/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_14/gid_2010_05_14_minmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_16/gid_2010_05_16_minmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_17/gid_2010_05_17_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_18/gid_2010_05_18_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_21/gid_2010_05_21_nyamlb_nynmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_22/gid_2010_05_22_nyamlb_nynmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_25/gid_2010_05_25_nyamlb_minmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_26/gid_2010_05_26_nyamlb_minmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_28/gid_2010_05_28_clemlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_05/day_30/gid_2010_05_30_clemlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_01/gid_2010_06_01_balmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_02/gid_2010_06_02_balmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_03/gid_2010_06_03_balmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_06/gid_2010_06_06_nyamlb_tormlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_08/gid_2010_06_08_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_09/gid_2010_06_09_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_11/gid_2010_06_11_houmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_13/gid_2010_06_13_houmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_19/gid_2010_06_19_nynmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_20/gid_2010_06_20_nynmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_23/gid_2010_06_23_nyamlb_arimlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_25/gid_2010_06_25_nyamlb_lanmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_27/gid_2010_06_27_nyamlb_lanmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_06/day_29/gid_2010_06_29_seamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_01/gid_2010_07_01_seamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_02/gid_2010_07_02_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_04/gid_2010_07_04_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_05/gid_2010_07_05_nyamlb_oakmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_08/gid_2010_07_08_nyamlb_seamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_09/gid_2010_07_09_nyamlb_seamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_16/gid_2010_07_16_tbamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_18/gid_2010_07_18_tbamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_20/gid_2010_07_20_anamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_21/gid_2010_07_21_anamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_25/gid_2010_07_25_kcamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_26/gid_2010_07_26_nyamlb_clemlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_30/gid_2010_07_30_nyamlb_tbamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_07/day_31/gid_2010_07_31_nyamlb_tbamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_04/gid_2010_08_04_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_07/gid_2010_08_07_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_08/gid_2010_08_08_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_09/gid_2010_08_09_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_10/gid_2010_08_10_nyamlb_texmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_11/gid_2010_08_11_nyamlb_texmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_14/gid_2010_08_14_nyamlb_kcamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_17/gid_2010_08_17_detmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_18/gid_2010_08_18_detmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_19/gid_2010_08_19_detmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_21/gid_2010_08_21_seamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_25/gid_2010_08_25_nyamlb_tormlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_28/gid_2010_08_28_nyamlb_chamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_29/gid_2010_08_29_nyamlb_chamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_08/day_31/gid_2010_08_31_oakmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_01/gid_2010_09_01_oakmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_03/gid_2010_09_03_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_04/gid_2010_09_04_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_05/gid_2010_09_05_tormlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_10/gid_2010_09_10_nyamlb_texmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_11/gid_2010_09_11_nyamlb_texmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_14/gid_2010_09_14_nyamlb_tbamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_15/gid_2010_09_15_nyamlb_tbamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_17/gid_2010_09_17_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_19/gid_2010_09_19_nyamlb_balmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_20/gid_2010_09_20_tbamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_21/gid_2010_09_21_tbamlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_26/gid_2010_09_26_bosmlb_nyamlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_09/day_28/gid_2010_09_28_nyamlb_tormlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_10/day_02/gid_2010_10_02_nyamlb_bosmlb_1/inning/inning_all.xml 
+http://gd2.mlb.com/components/game/mlb/year_2010/month_10/day_02/gid_2010_10_02_nyamlb_bosmlb_2/inning/inning_all.xml 
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>rh2010dat <span class="o">=</span> dat<span class="o">$</span>pitch <span class="o">%&gt;%</span> left_join<span class="p">(</span>dat<span class="o">$</span>atbat<span class="p">,</span> by <span class="o">=</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;num&quot;</span><span class="p">,</span><span class="s">&quot;gameday_link&quot;</span><span class="p">))</span>
+<span class="kp">dim</span><span class="p">(</span>rh2010dat<span class="p">)</span>
+<span class="c1">#25692 71</span>
+rivera2010 <span class="o">=</span> <span class="kp">subset</span><span class="p">(</span>rh2010dat<span class="p">,</span> pitcher <span class="o">==</span> <span class="m">121250</span> <span class="o">&amp;</span> <span class="p">(</span>pitch_type <span class="o">==</span> <span class="s">&quot;FC&quot;</span> <span class="o">|</span> pitch_type <span class="o">==</span> <span class="s">&quot;FF&quot;</span><span class="p">))</span>
+hughes2010 <span class="o">=</span> <span class="kp">subset</span><span class="p">(</span>rh2010dat<span class="p">,</span> pitcher <span class="o">==</span> <span class="m">461833</span> <span class="o">&amp;</span> <span class="p">(</span>pitch_type <span class="o">==</span> <span class="s">&quot;FC&quot;</span> <span class="o">|</span> pitch_type <span class="o">==</span> <span class="s">&quot;FF&quot;</span><span class="p">))</span>
+<span class="c1">#names(rivera2010[,c(12, 29, 30, 31, 36, 37)])</span>
+<span class="c1">#unique(rivera2010$pitch_type)</span>
+rivera2010NSC <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>rivera2010<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="m">29</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">36</span><span class="p">,</span> <span class="m">37</span><span class="p">)],</span> <span class="kp">as.numeric</span><span class="p">)</span>
+rivera2010SC <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>rivera2010NSC<span class="p">)</span>
+hughes2010NSC <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>hughes2010<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">12</span><span class="p">,</span> <span class="m">29</span><span class="p">,</span> <span class="m">30</span><span class="p">,</span> <span class="m">31</span><span class="p">,</span> <span class="m">36</span><span class="p">,</span> <span class="m">37</span><span class="p">)],</span> <span class="kp">as.numeric</span><span class="p">)</span>
+hughes2010SC <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>hughes2010NSC<span class="p">)</span>
+<span class="c1">#table(subset(rh2010dat, pitcher == 121250)$pitch_type)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<ol class=list-inline>
+	<li>25692</li>
+	<li>76</li>
+</ol>
+
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[22]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>
+ FC  FF  IN  PO 
+751 164   7   1 </pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># KMeans Clustering</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;K-Means Clustering&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
+pclust.SC.rivera2010 <span class="o">&lt;-</span> kmeans<span class="p">(</span>rivera2010SC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
+rivera2010<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.rivera2010<span class="o">$</span>cluster
+<span class="kp">table</span><span class="p">(</span>rivera2010<span class="o">$</span>pitch_type<span class="p">,</span> rivera2010<span class="o">$</span>clusterSC<span class="p">)</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
+pclust.SC.hughes2010 <span class="o">&lt;-</span> kmeans<span class="p">(</span>hughes2010SC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
+hughes2010<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.hughes2010<span class="o">$</span>cluster
+<span class="kp">table</span><span class="p">(</span>hughes2010<span class="o">$</span>pitch_type<span class="p">,</span> hughes2010<span class="o">$</span>clusterSC<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;K-Means Clustering&#34;
+[1] &#34;Mariano Rivera&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       1   2
+  FC 743   8
+  FF  17 147</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[25]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+        1    2
+  FC    0  348
+  FF 1777  158</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># Hierarchical Clustering</span>
+<span class="c1"># http://www.r-tutor.com/gpu-computing/clustering/hierarchical-cluster-analysis</span>
+<span class="c1"># https://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html</span>
+<span class="c1"># https://stat.ethz.ch/R-manual/R-devel/library/stats/html/hclust.html</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Hierarchical Clustering&quot;</span><span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
+d.rivera2010 <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>rivera2010SC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
+hc.rivera2010 <span class="o">=</span> hclust<span class="p">(</span>d.rivera2010<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
+clustcut.rivera2010 <span class="o">=</span> cutree<span class="p">(</span>hc.rivera2010<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+rivera2010<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.rivera2010
+<span class="kp">table</span><span class="p">(</span>rivera2010<span class="o">$</span>pitch_type<span class="p">,</span> rivera2010<span class="o">$</span>hierclust<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera2010<span class="o">$</span>clusterSC<span class="p">,</span> rivera2010<span class="o">$</span>hierclust<span class="p">)</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
+d.hughes2010 <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>hughes2010SC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
+hc.hughes2010 <span class="o">=</span> hclust<span class="p">(</span>d.hughes2010<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
+clustcut.hughes2010 <span class="o">=</span> cutree<span class="p">(</span>hc.hughes2010<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
+hughes2010<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hughes2010
+<span class="kp">table</span><span class="p">(</span>hughes2010<span class="o">$</span>pitch_type<span class="p">,</span> hughes2010<span class="o">$</span>hierclust<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes2010<span class="o">$</span>clusterSC<span class="p">,</span> hughes2010<span class="o">$</span>hierclust<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Hierarchical Clustering&#34;
+[1] &#34;Mariano Rivera&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       1   2
+  FC 719  32
+  FF  33 131</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+      1   2
+  1 734  26
+  2  18 137</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+        1    2
+  FC    1  347
+  FF 1806  129</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+       1    2
+  1 1759   18
+  2   48  458</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="kp">print</span><span class="p">(</span><span class="s">&quot;SVM w/2011 Model&quot;</span><span class="p">)</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
+<span class="c1">#svm_model.rivera2010 &lt;- svm(rivera2010SC, as.factor(rivera2010$pitch_type)) # this would create a new model, we want to use the old one</span>
+svm_predict.rivera2010 <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.rivera<span class="p">,</span> rivera2010SC<span class="p">)</span>
+rivera2010<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.rivera2010
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;MLB Classification vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera2010<span class="o">$</span>pitch_type<span class="p">,</span> rivera2010<span class="o">$</span>svmpred<span class="p">)</span>
+
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
+svm_predict.hughes2010 <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.hughes<span class="p">,</span> hughes2010SC<span class="p">)</span>
+hughes2010<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.hughes2010
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;MLB Classification vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes2010<span class="o">$</span>pitch_type<span class="p">,</span> hughes2010<span class="o">$</span>svmpred<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;SVM w/2011 Model&#34;
+[1] &#34;Mariano Rivera&#34;
+[1] &#34;MLB Classification vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+      FC  FF
+  FC 750   1
+  FF  22 142</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+[1] &#34;MLB Classification vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       FC   FF
+  FC  347    1
+  FF   76 1859</pre>
 </div>
 
 </div>
