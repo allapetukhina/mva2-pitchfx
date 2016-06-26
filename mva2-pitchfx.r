@@ -19,27 +19,24 @@ names(hughes)
 # rivera[,c(17, 34, 35, 36, 41, 42)]
 # start_speed break_y break_angle break_length spin_dir spin_rate
 
+print("Mariano Rivera")
 riveraNSC = sapply(rivera[,c(17, 34, 35, 36, 41, 42)], as.numeric)
 riveraSC = scale(riveraNSC)
-
 pclust.NSC.rivera <- kmeans(riveraNSC, 2, nstart=10)
 rivera$clusterNSC <- pclust.NSC.rivera$cluster
-
 pclust.SC.rivera <- kmeans(riveraSC, 2, nstart=10)
 rivera$clusterSC <- pclust.SC.rivera$cluster
-
-hughesNSC = sapply(hughes[,c(17, 34, 35, 36, 41, 42)], as.numeric)
-hughesSC = scale(hughesNSC)
-
-pclust.NSC.hughes <- kmeans(hughesNSC, 2, nstart=10)
-hughes$clusterNSC <- pclust.NSC.hughes$cluster
-
-pclust.SC.hughes <- kmeans(hughesSC, 2, nstart=10)
-hughes$clusterSC <- pclust.SC.hughes$cluster
-
-
+table(rivera$pitch_type, rivera$clusterNSC)
 table(rivera$pitch_type, rivera$clusterSC)
 
+print("Phil Hughes")
+hughesNSC = sapply(hughes[,c(17, 34, 35, 36, 41, 42)], as.numeric)
+hughesSC = scale(hughesNSC)
+pclust.NSC.hughes <- kmeans(hughesNSC, 2, nstart=10)
+hughes$clusterNSC <- pclust.NSC.hughes$cluster
+pclust.SC.hughes <- kmeans(hughesSC, 2, nstart=10)
+hughes$clusterSC <- pclust.SC.hughes$cluster
+table(hughes$pitch_type, hughes$clusterNSC)
 table(hughes$pitch_type, hughes$clusterSC)
 
 # Hierarchical Clustering
@@ -51,16 +48,48 @@ d.rivera = dist(as.matrix(riveraSC), method = 'maximum')
 hc.rivera = hclust(d.rivera, method = 'ward.D2')
 clustcut.rivera = cutree(hc.rivera, 2)
 rivera$hierclust <- clustcut.rivera
-table(rivera$pitch_type, clustcut.rivera)
-table(rivera$hierclust, rivera$clusterSC)
+table(rivera$pitch_type, rivera$hierclust)
+table(rivera$clusterSC, rivera$hierclust)
 
 
 d.hughes = dist(as.matrix(hughesSC), method = 'maximum')
 hc.hughes = hclust(d.hughes, method = 'ward.D2')
 clustcut.hughes = cutree(hc.hughes, 2)
 hughes$hierclust <- clustcut.hughes
-table(hughes$pitch_type, clustcut.hughes)
-table(hughes$hierclust, hughes$clusterSC)
+table(hughes$pitch_type, hughes$hierclust)
+table(hughes$clusterSC, hughes$hierclust)
+
+
+#install.packages("kernlab")
+#library(kernlab)
+
+#install.packages("e1071")
+library(e1071)
+
+# SVM
+# http://rischanlab.github.io/SVM.html
+
+svm_model.rivera <- svm(riveraSC, as.factor(rivera$pitch_type))
+svm_predict.rivera <- predict(svm_model.rivera, riveraSC)
+rivera$svmpred <- svm_predict.rivera
+print("MLB Classification vs SVM:")
+table(rivera$pitch_type, rivera$svmpred)
+print("Hierarchical Clustering vs SVM:")
+table(rivera$hierclust, rivera$svmpred)
+print("K-Means vs SVM:")
+table(rivera$clusterSC, rivera$svmpred)
+
+
+
+svm_model.hughes <- svm(hughesSC, as.factor(hughes$pitch_type), kernel="radial")
+svm_predict.hughes <- predict(svm_model.hughes, hughesSC)
+hughes$svmpred <- svm_predict.hughes
+print("MLB Classification vs SVM:")
+table(hughes$pitch_type, hughes$svmpred)
+print("Hierarchical Clustering vs SVM:")
+table(hughes$hierclust, hughes$svmpred)
+print("K-Means vs SVM:")
+table(hughes$clusterSC, hughes$svmpred)
 
 
 

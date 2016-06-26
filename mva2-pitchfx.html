@@ -11879,7 +11879,7 @@ hughes <span class="o">=</span> <span class="kp">subset</span><span class="p">(<
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># KMeans Clustering</span>
@@ -11887,36 +11887,25 @@ hughes <span class="o">=</span> <span class="kp">subset</span><span class="p">(<
 <span class="c1"># rivera[,c(17, 34, 35, 36, 41, 42)]</span>
 <span class="c1"># start_speed break_y break_angle break_length spin_dir spin_rate</span>
 
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Mariano Rivera&quot;</span><span class="p">)</span>
 riveraNSC <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>rivera<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">17</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">35</span><span class="p">,</span> <span class="m">36</span><span class="p">,</span> <span class="m">41</span><span class="p">,</span> <span class="m">42</span><span class="p">)],</span> <span class="kp">as.numeric</span><span class="p">)</span>
 riveraSC <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>riveraNSC<span class="p">)</span>
-
 pclust.NSC.rivera <span class="o">&lt;-</span> kmeans<span class="p">(</span>riveraNSC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
 rivera<span class="o">$</span>clusterNSC <span class="o">&lt;-</span> pclust.NSC.rivera<span class="o">$</span>cluster
-
 pclust.SC.rivera <span class="o">&lt;-</span> kmeans<span class="p">(</span>riveraSC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
 rivera<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.rivera<span class="o">$</span>cluster
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>clusterNSC<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>clusterSC<span class="p">)</span>
 
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Phil Hughes&quot;</span><span class="p">)</span>
 hughesNSC <span class="o">=</span> <span class="kp">sapply</span><span class="p">(</span>hughes<span class="p">[,</span><span class="kt">c</span><span class="p">(</span><span class="m">17</span><span class="p">,</span> <span class="m">34</span><span class="p">,</span> <span class="m">35</span><span class="p">,</span> <span class="m">36</span><span class="p">,</span> <span class="m">41</span><span class="p">,</span> <span class="m">42</span><span class="p">)],</span> <span class="kp">as.numeric</span><span class="p">)</span>
 hughesSC <span class="o">=</span> <span class="kp">scale</span><span class="p">(</span>hughesNSC<span class="p">)</span>
-
 pclust.NSC.hughes <span class="o">&lt;-</span> kmeans<span class="p">(</span>hughesNSC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
 hughes<span class="o">$</span>clusterNSC <span class="o">&lt;-</span> pclust.NSC.hughes<span class="o">$</span>cluster
-
 pclust.SC.hughes <span class="o">&lt;-</span> kmeans<span class="p">(</span>hughesSC<span class="p">,</span> <span class="m">2</span><span class="p">,</span> nstart<span class="o">=</span><span class="m">10</span><span class="p">)</span>
 hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.hughes<span class="o">$</span>cluster
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>clusterSC<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> hughes<span class="o">$</span>clusterNSC<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> hughes<span class="o">$</span>clusterSC<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11927,39 +11916,57 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[53]:</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Mariano Rivera&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>    
        1   2
-  FC  30 759
-  FF 119   4</pre>
+  FC 375 414
+  FF  85  38</pre>
 </div>
 
 </div>
 
-</div>
+<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       1   2
+  FC 759  30
+  FF   4 119</pre>
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-r"><pre><span></span><span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> hughes<span class="o">$</span>clusterSC<span class="p">)</span>
-</pre></div>
 
-</div>
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Phil Hughes&#34;
+</pre>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[54]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+       1   2
+  FC 136  12
+  FF 192 606</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[118]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
@@ -11977,7 +11984,7 @@ hughes<span class="o">$</span>clusterSC <span class="o">&lt;-</span> pclust.SC.h
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span><span class="c1"># Hierarchical Clustering</span>
@@ -11989,8 +11996,8 @@ d.rivera <span class="o">=</span> dist<span class="p">(</span><span class="kp">a
 hc.rivera <span class="o">=</span> hclust<span class="p">(</span>d.rivera<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
 clustcut.rivera <span class="o">=</span> cutree<span class="p">(</span>hc.rivera<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 rivera<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.rivera
-<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> clustcut.rivera<span class="p">)</span>
-<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>hierclust<span class="p">,</span> rivera<span class="o">$</span>clusterSC<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>hierclust<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>clusterSC<span class="p">,</span> rivera<span class="o">$</span>hierclust<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12001,11 +12008,11 @@ rivera<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.ri
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[93]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>    clustcut.rivera
+<pre>    
        1   2
   FC 786   3
   FF  17 106</pre>
@@ -12013,14 +12020,14 @@ rivera<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.ri
 
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[93]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[109]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>   
       1   2
-  1  41 762
-  2 108   1</pre>
+  1  41 108
+  2 762   1</pre>
 </div>
 
 </div>
@@ -12031,15 +12038,15 @@ rivera<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.ri
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-r"><pre><span></span>d.hughes <span class="o">=</span> dist<span class="p">(</span><span class="kp">as.matrix</span><span class="p">(</span>hughesSC<span class="p">),</span> method <span class="o">=</span> <span class="s">&#39;maximum&#39;</span><span class="p">)</span>
 hc.hughes <span class="o">=</span> hclust<span class="p">(</span>d.hughes<span class="p">,</span> method <span class="o">=</span> <span class="s">&#39;ward.D2&#39;</span><span class="p">)</span>
 clustcut.hughes <span class="o">=</span> cutree<span class="p">(</span>hc.hughes<span class="p">,</span> <span class="m">2</span><span class="p">)</span>
 hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hughes
-<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> clustcut.hughes<span class="p">)</span>
-<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>hierclust<span class="p">,</span> hughes<span class="o">$</span>clusterSC<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> hughes<span class="o">$</span>hierclust<span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>clusterSC<span class="p">,</span> hughes<span class="o">$</span>hierclust<span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12050,11 +12057,11 @@ hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hu
 <div class="output">
 
 
-<div class="output_area"><div class="prompt output_prompt">Out[94]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>    clustcut.hughes
+<pre>    
        1   2
   FC   1 147
   FF 782  16</pre>
@@ -12062,14 +12069,239 @@ hughes<span class="o">$</span>hierclust <span class="o">&lt;-</span> clustcut.hu
 
 </div>
 
-<div class="output_area"><div class="prompt output_prompt">Out[94]:</div>
+<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
 
 
 <div class="output_text output_subarea output_execute_result">
 <pre>   
       1   2
-  1 773  10
-  2  11 152</pre>
+  1 773  11
+  2  10 152</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[97]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#install.packages(&quot;kernlab&quot;)</span>
+<span class="c1">#library(kernlab)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1">#install.packages(&quot;e1071&quot;)</span>
+<span class="kn">library</span><span class="p">(</span>e1071<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+The downloaded source packages are in
+	‘/tmp/RtmpjqS5L7/downloaded_packages’
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Updating HTML index of packages in &#39;.Library&#39;
+Making &#39;packages.html&#39; ... done
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span><span class="c1"># SVM</span>
+<span class="c1"># http://rischanlab.github.io/SVM.html</span>
+
+svm_model.rivera <span class="o">&lt;-</span> svm<span class="p">(</span>riveraSC<span class="p">,</span> <span class="kp">as.factor</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">))</span>
+svm_predict.rivera <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.rivera<span class="p">,</span> riveraSC<span class="p">)</span>
+rivera<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.rivera
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;MLB Classification vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>pitch_type<span class="p">,</span> rivera<span class="o">$</span>svmpred<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Hierarchical Clustering vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>hierclust<span class="p">,</span> rivera<span class="o">$</span>svmpred<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;K-Means vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>rivera<span class="o">$</span>clusterSC<span class="p">,</span> rivera<span class="o">$</span>svmpred<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;MLB Classification vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+      FC  FF
+  FC 787   2
+  FF   5 118</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Hierarchical Clustering vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1 789  14
+  2   3 106</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;K-Means vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[116]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1  33 116
+  2 759   4</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-r"><pre><span></span>svm_model.hughes <span class="o">&lt;-</span> svm<span class="p">(</span>hughesSC<span class="p">,</span> <span class="kp">as.factor</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">),</span> kernel<span class="o">=</span><span class="s">&quot;radial&quot;</span><span class="p">)</span>
+svm_predict.hughes <span class="o">&lt;-</span> predict<span class="p">(</span>svm_model.hughes<span class="p">,</span> hughesSC<span class="p">)</span>
+hughes<span class="o">$</span>svmpred <span class="o">&lt;-</span> svm_predict.hughes
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;MLB Classification vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>pitch_type<span class="p">,</span> hughes<span class="o">$</span>svmpred<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;Hierarchical Clustering vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>hierclust<span class="p">,</span> hughes<span class="o">$</span>svmpred<span class="p">)</span>
+<span class="kp">print</span><span class="p">(</span><span class="s">&quot;K-Means vs SVM:&quot;</span><span class="p">)</span>
+<span class="kp">table</span><span class="p">(</span>hughes<span class="o">$</span>clusterSC<span class="p">,</span> hughes<span class="o">$</span>svmpred<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;MLB Classification vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>    
+      FC  FF
+  FC 148   0
+  FF   2 796</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;Hierarchical Clustering vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1   1 782
+  2 149  14</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1] &#34;K-Means vs SVM:&#34;
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>   
+     FC  FF
+  1   0 784
+  2 150  12</pre>
 </div>
 
 </div>
