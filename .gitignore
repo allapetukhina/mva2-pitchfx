@@ -38,4 +38,5 @@ vignettes/*.pdf
 # Large data files
 rh2010dat.csv
 MVA2pitchfx.ipynb
-MVA2pitchfx.html
+#MVA2pitchfx.html
+*.svg

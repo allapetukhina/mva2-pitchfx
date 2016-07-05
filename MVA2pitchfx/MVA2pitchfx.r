@@ -79,9 +79,9 @@ print("Mariano Rivera")
 svm_model.rivera2010 = svm(rivera2010SC, as.factor(rivera2010$pitch_type),
                            kernel="radial",gamma=1/dim(rivera2010SC)[2], cost=1)
 
-rivera_svm_tune      = tune(svm, train.x=rivera2010SC, train.y=as.factor(rivera2010$pitch_type), 
-                            kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(1/dim(rivera2010SC)[2],.5,1,2)))
-print(rivera_svm_tune)
+#rivera_svm_tune      = tune(svm, train.x=rivera2010SC, train.y=as.factor(rivera2010$pitch_type), 
+#                            kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(1/dim(rivera2010SC)[2],.5,1,2)))
+#print(rivera_svm_tune)
 
 rivera$svmpred = predict(svm_model.rivera2010, riveraSC)
 table(rivera$pitch_type, rivera$svmpred)
@@ -89,9 +89,9 @@ table(rivera$pitch_type, rivera$svmpred)
 print("Phil Hughes")
 svm_model.hughes2010 = svm(hughes2010SC, as.factor(hughes2010$pitch_type),
                             kernel="radial",gamma=1/dim(hughes2010SC)[2], cost=1)
-hughes_svm_tune      = tune(svm, train.x=hughes2010SC, train.y=as.factor(hughes2010$pitch_type), 
-                            kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(1/dim(hughes2010SC)[2],.5,1,2)))
-print(hughes_svm_tune)
+#hughes_svm_tune      = tune(svm, train.x=hughes2010SC, train.y=as.factor(hughes2010$pitch_type), 
+#                            kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(1/dim(hughes2010SC)[2],.5,1,2)))
+#print(hughes_svm_tune)
 
 hughes$svmpred = predict(svm_model.hughes2010, hughesSC)
 table(hughes$pitch_type, hughes$svmpred)
@@ -99,52 +99,69 @@ table(hughes$pitch_type, hughes$svmpred)
 # Pairwise and PCA Analysis
 
 # Pair-Wise Analysis
-print("Mariano Rivera Pairwise Analysis")
+png("rivera-pairwise-kmeans.png", width=900, height=900)
 pairs(riveraSC, main = "Mariano Rivera - Pairwise K-means Clusters", 
       pch=as.numeric(as.factor(rivera$kmeansSC)), col=as.factor(rivera$pitch_type))
+dev.off()
+#png("rivera-pairwise-hierarchical.png", width=900, height=900)
 #pairs(riveraSC, main = "Mariano Rivera - Pairwise Hierarchical Clusters", 
 #      pch=as.numeric(as.factor(rivera$hierarchical)), col=as.factor(rivera$pitch_type))
+#dev.off()
+png("rivera-pairwise-svm.png", width=900, height=900)
 pairs(riveraSC, main = "Mariano Rivera - Pairwise SVM Classification", 
       pch=as.numeric(as.factor(rivera$svmpred)), col=as.factor(rivera$pitch_type))
+dev.off()
 
-print("Phil Hughes Pairwise Analysis")
+png("hughes-pairwise-kmeans.png", width=900, height=900)
 pairs(hughesSC, main = "Phil Hughes - Pairwise - K-means Clusters", 
       pch=as.numeric(as.factor(hughes$kmeansSC)), col=as.factor(hughes$pitch_type))
+dev.off()
+#png("hughes-pairwise-hierarchical.png", width=900, height=900)
 #pairs(riveraSC, main = "Phil Hughes - Pairwise - Hierarchical Clusters", 
 #      pch=as.numeric(as.factor(rivera$hierarchical)), col=as.factor(rivera$pitch_type))
+#dev.off()
+png("hughes-pairwise-svm.png", width=900, height=900)
 pairs(hughesSC, main = "Phil Hughes - Pairwise - SVM Classification", 
       pch=as.numeric(as.factor(hughes$svmpred)), col=as.factor(hughes$pitch_type))
-
+dev.off()
 
 # PCA Analysis
-print("Mariano Rivera PCA Analysis")
 cov.rivera   = t(riveraSC) %*% riveraSC
 pcaan.rivera = prcomp(riveraSC)
 
 # Scree Plot (Not Currently Used)
 #screeplot(pcaan.rivera, type="lines")
 
+png("rivera-pca-kmeans.png", width=900, height=900)
 pairs(pcaan.rivera$x[,c("PC1", "PC2", "PC3")], main = "Mariano Rivera - PCA - K-means Clusters", 
       pch=as.numeric(as.factor(rivera$kmeansSC)), col=as.factor(rivera$pitch_type))
+dev.off()
+#png("rivera-pca-hierarchical.png", width=900, height=900)
 #pairs(pcaan.rivera$x[,c("PC1", "PC2", "PC3")], main = "Mariano Rivera - PCA - Hierarchical Clusters", 
 #      pch=as.numeric(as.factor(rivera$hierarchical)), col=as.factor(rivera$pitch_type))
+#dev.off()
+png("rivera-pca-svm.png", width=900, height=900)
 pairs(pcaan.rivera$x[,c("PC1", "PC2", "PC3")], main = "Mariano Rivera - PCA - SVM Classification", 
       pch=as.numeric(as.factor(rivera$svmpred)), col=as.factor(rivera$pitch_type))
+dev.off()
 
-
-print("Phil Hughes PCA Analysis")
 cov.hughes   = t(hughesSC) %*% hughesSC
 pcaan.hughes = prcomp(hughesSC)
 
 # Scree Plot (Not Currently Used)
 #screeplot(pcaan.hughes, type="lines")
 
+png("hughes-pca-kmeans.png", width=900, height=900)
 pairs(pcaan.hughes$x[,c("PC1", "PC2", "PC3")], main = "Phil Hughes - PCA - K-means Clusters", 
       pch=as.numeric(as.factor(hughes$kmeansSC)), col=as.factor(hughes$pitch_type))
+dev.off()
+#png("hughes-pca-hierarchical.png", width=900, height=900)
 #pairs(pcaan.hughes$x[,c("PC1", "PC2", "PC3")], main = "Phil Hughes - PCA - Hierarchical Clusters", 
 #      pch=as.numeric(as.factor(hughes$hierarchical)), col=as.factor(hughes$pitch_type))
+#dev.off()
+png("hughes-pca-svm.png", width=900, height=900)
 pairs(pcaan.hughes$x[,c("PC1", "PC2", "PC3")], main = "Phil Hughes - PCA - SVM Classification", 
       pch=as.numeric(as.factor(hughes$svmpred)), col=as.factor(hughes$pitch_type))
-
+dev.off()
 
 
