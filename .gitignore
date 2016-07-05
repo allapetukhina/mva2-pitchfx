@@ -31,3 +31,11 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Large data files
+rh2010dat.csv
+MVA2pitchfx.ipynb
+MVA2pitchfx.html
