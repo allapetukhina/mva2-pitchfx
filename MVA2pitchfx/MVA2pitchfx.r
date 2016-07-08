@@ -11,9 +11,11 @@ lapply(libraries, library, quietly = TRUE, character.only = TRUE)
   
 
 # Some of Jinhua's Code
-plot_cmethod = function(x_dat, y_dat, title, x_label, y_label, colors, shapes, save_name = NA) {
+plot_cmethod = function(x_dat, y_dat, title, x_label, y_label, colors, shapes, 
+                        save_name = NA, 
+                        legend_names = c("Pitch type: FC","Pitch type: FF","First cluster","Second cluster")) {
     plot(x_dat,y_dat,main = title, xlab = x_label, ylab = y_label, col=colors, pch=shapes)
-    legend("bottomleft", c("Pitch type: FC","Pitch type: FF","First cluster","Second cluster"),
+    legend("bottomleft", legend_names,
            pch=c(20,20,2,1), col = c(1,2,1,1),cex = 0.75)
     if(!is.na(save_name)) {
         dev.copy(png, save_name)
@@ -21,7 +23,7 @@ plot_cmethod = function(x_dat, y_dat, title, x_label, y_label, colors, shapes, s
     }
 }
 
-get_ward_cluster = function(dat_scaled, cut_h = 400) {
+get_ward_cluster = function(dat_scaled, cut_h = 2) {
     d = dist(dat_scaled, "euclidean", p = 2)   # euclidean distance matrix
     w = hclust(d, method = "ward.D")   
     return(cutree(w, h = cut_h))
@@ -185,36 +187,37 @@ dev.off()
 
 # Plot 3: PCA with clusters: Ward
 
-rivera$ward = get_ward_cluster(riveraSC)
-hughes$ward = get_ward_cluster(hughesSC)
+rivera$ward = get_ward_cluster(riveraSC, 300)
+hughes$ward = get_ward_cluster(hughesSC, 400)
 
 # Mariano Rivera
 plot_cmethod(pcaan.rivera$x[,"PC1"], pcaan.rivera$x[,"PC2"], "Mariano Rivera's_Ward Method", 
              "First PC", "Second PC", as.factor(rivera$pitch_type), as.numeric(as.factor(rivera$ward)), 
-             "mr_ward.png")
+             save_name = "mr_ward.png")
 
 plot_cmethod(pcaan.rivera$x[,"PC1"], pcaan.rivera$x[,"PC2"], "Mariano Rivera's_K-means Method", 
              "First PC", "Second PC", as.factor(rivera$pitch_type), as.numeric(as.factor(rivera$kmeansSC)), 
-             "mr_kmeans.png")
+             save_name = "mr_kmeans.png")
 
 plot_cmethod(pcaan.rivera$x[,"PC1"], pcaan.rivera$x[,"PC2"], "Mariano Rivera's_SVM Method", 
              "First PC", "Second PC", as.factor(rivera$pitch_type), as.numeric(as.factor(rivera$svmpred)), 
-             "mr_svm.png")
+             save_name = "mr_svm.png", 
+             legend_names = c("MLB Pitch type: FC","MLB Pitch type: FF","SVM Pitch type: FF","SVM Pitch type: FC"))
 
 # Phil Hughes
 
 plot_cmethod(pcaan.hughes$x[,"PC1"], pcaan.hughes$x[,"PC2"], "Phil Hughes's_Ward Method", 
              "First PC", "Second PC", as.factor(hughes$pitch_type), as.numeric(as.factor(hughes$ward)), 
-             "ph_ward.png")
+             save_name = "ph_ward.png")
 
 plot_cmethod(pcaan.hughes$x[,"PC1"], pcaan.hughes$x[,"PC2"], "Phil Hughes's_K-means Method", 
              "First PC", "Second PC", as.factor(hughes$pitch_type), as.numeric(as.factor(hughes$kmeansSC)), 
-             "ph_kmeans.png")
+             save_name = "ph_kmeans.png")
 
 plot_cmethod(pcaan.hughes$x[,"PC1"], pcaan.hughes$x[,"PC2"], "Phil Hughes's_SVM Method", 
              "First PC", "Second PC", as.factor(hughes$pitch_type), as.numeric(as.factor(hughes$svmpred)), 
-             "ph_svm.png")
-
+             save_name = "ph_svm.png", 
+             legend_names = c("MLB Pitch type: FC","MLB Pitch type: FF","SVM Pitch type: FF","SVM Pitch type: FC"))
 
 # Jinhua's Code
 
