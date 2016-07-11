@@ -1,0 +1,17 @@
+Name of Quantlet: ENRgenics_BasicPlots
+
+Published in: [Github]
+
+Description: 'Shows an example usage of the AddOther and ImportEIA quantlets.  The data is then clustered by state and plotted onto a map of the United States.'
+
+Keywords: EIA, clustering, kmeans, plotting, geoplots, USA, energy
+
+See also: ENRgenics_AddOther, ENRgenics_ImportEIA
+
+Author: David Pollack, Reethesh Jayakumar, Brian Rooney
+
+Submitted:  07.2016
+
+Datafile: sales_revenue.csv.0, climdiv-tmpcst-v1.0.0-20160605
+
+Examples: See "output" folder.
