@@ -1,17 +1,13 @@
-Name of Quantlet: ENRgenics_BasicPlots
+Name of QuantLet: MVA2pitchfx
 
 Published in: [Github]
 
-Description: 'Shows an example usage of the AddOther and ImportEIA quantlets.  The data is then clustered by state and plotted onto a map of the United States.'
+Description: 'Visualised PITCHf/x data of two players, conducts cluster analysis using Ward and K-means algorithm, conducts classification analysis with Support Vector Machine(SVM).'
 
-Keywords: EIA, clustering, kmeans, plotting, geoplots, USA, energy
+Keywords: 'cluster-analysis, Ward algorithm, kmeans, graphical representation, data visualization, SVM'
 
-See also: ENRgenics_AddOther, ENRgenics_ImportEIA
-
-Author: David Pollack, Reethesh Jayakumar, Brian Rooney
+Author: David Pollack, Jinhua Yang, Fan Song
 
 Submitted:  07.2016
 
-Datafile: sales_revenue.csv.0, climdiv-tmpcst-v1.0.0-20160605
-
-Examples: See "output" folder.
+Datafile: rh2010dat.csv
