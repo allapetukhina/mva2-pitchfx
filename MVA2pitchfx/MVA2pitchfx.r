@@ -102,12 +102,12 @@ legend("topright", c("First PC", "Second PC"), lwd = 2,
 #Hughes
 # PCA Analysis
 hughes.2011.pca = prcomp(hughes.2011.pSC)
-eva2=(hughes.2011.pca$sdev)^2
-vae2  =eva2/sum(eva2)
+eva2 = (hughes.2011.pca$sdev)^2
+vae2 = eva2/sum(eva2)
 
 #plot variance explained
 plot(vae2, xlab = "Index", ylab = "Variance Explained", 
-     main = "Phil Hughes", type="b")
+     main = "Phil Hughes", type = "b")
 
 #plot all the observations on first and second PC coordinates
 plot(hughes.2011.pca$x[,c("PC1")],hughes.2011.pca$x[,c("PC2")],main = "Pitches from Phil Hughes",
