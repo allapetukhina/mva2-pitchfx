@@ -77,10 +77,12 @@ hughes.2010.pSC   = scale(hughes.2010.pNSC)
 
 # PCA Analysis
 rivera.2011.pca = prcomp(rivera.2011.pSC)
+eva1 = (rivera.2011.pca$sdev)^2
+vae1 = eva1/sum(eva1)
 
 #plot variance explained
-plot(rivera.2011.pca$sdev, xlab = "Index", ylab = "Lambda", 
-     main = "Mariano Rivera: variance \n explained by eigenvectors", type="b")
+plot(vae1, xlab = "Index", ylab = "Variance Explained", 
+     main = "Mariano Rivera", type = "b")
 
 #plot all the observations on first and second PC coordinates
 plot(rivera.2011.pca$x[,c("PC1")],rivera.2011.pca$x[,c("PC2")],main = "Pitches from Mariano Rivera",
@@ -100,10 +102,12 @@ legend("topright", c("First PC", "Second PC"), lwd = 2,
 #Hughes
 # PCA Analysis
 hughes.2011.pca = prcomp(hughes.2011.pSC)
+eva2=(hughes.2011.pca$sdev)^2
+vae2  =eva2/sum(eva2)
 
 #plot variance explained
-plot(hughes.2011.pca$sdev, xlab = "Index", ylab = "Lambda", 
-     main = "Phil Hughes: variance \n explained by eigenvectors", type="b")
+plot(vae2, xlab = "Index", ylab = "Variance Explained", 
+     main = "Phil Hughes", type="b")
 
 #plot all the observations on first and second PC coordinates
 plot(hughes.2011.pca$x[,c("PC1")],hughes.2011.pca$x[,c("PC2")],main = "Pitches from Phil Hughes",
