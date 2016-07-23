@@ -7,9 +7,12 @@ Name of QuantLet: MVA2pitchfx
 
 Published in: [Github]
 
-Description: 'Visualised PITCHf/x data of two players, conducts cluster analysis using Ward and K-means algorithm, conducts classification analysis with Support Vector Machine(SVM).'
+Description: 'Visualised PITCHf/x data of two players, conducts cluster analysis 
+using Ward and K-means algorithm, conducts classification analysis with Support 
+Vector Machine(SVM).'
 
-Keywords: 'cluster-analysis, Ward algorithm, kmeans, graphical representation, data visualization, SVM'
+Keywords: 'cluster-analysis, Ward algorithm, kmeans, graphical representation, 
+data visualization, SVM'
 
 Author: David Pollack, Jinhua Yang, Fan Song
 
