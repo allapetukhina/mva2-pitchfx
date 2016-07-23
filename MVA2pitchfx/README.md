@@ -19,10 +19,14 @@ Datafile: rh2010dat.csv
 ```
 
 ![Picture1](mr_variance explained.png)
-![Picture1](mr_variance explained.png)
-![Picture1](mr_variance explained.png)
-![Picture1](mr_variance explained.png)
-![Picture1](mr_variance explained.png)![Picture1](mr_variance explained.png)
+![Picture1](ph_variance explained.png)
+![Picture1](mr_Factor.png)
+![Picture1](ph_factor.png)
+![Picture1](mr_ward.png)![Picture1](ph_ward.png)
+![Picture1](mr_kmeans.png)
+![Picture1](ph_kmeans.png)
+![Picture1](mr_svm.png)
+![Picture1](ph_svm.png)
 
 ```r
 #options(repos = c(CRAN = "http://cran.rstudio.com"))
